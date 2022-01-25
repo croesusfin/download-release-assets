@@ -41,7 +41,7 @@ with:
 # Custom Release Configuration
 
 ```yaml
-uses: eliarms/download-release-assets@v1.0.0
+uses: croesusfin/download-release-assets@v1.0.0
 with:
   release: latest
   github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ with:
 # Custom Release and Repository Configuration
 
 ```yaml
-uses: eliarms/download-release-assets@v1
+uses: croesusfin/download-release-assets@v1.0.0
 with:
   repository: croesusfin/deployment-scripts
   release: latest
@@ -70,7 +70,7 @@ jobs:
     - uses: actions/checkout@master
     
     - name: Dwonload release Asset
-      uses: croesusfin/download-release-assets@v1
+      uses: croesusfin/download-release-assets@v1.0.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -83,7 +83,7 @@ steps:
 
 - name: Dwonload release Asset
   id: downloadassets
-  uses: eliarms/download-release-assets@v1.0.0
+  uses: croesusfin/download-release-assets@v1.0.0
   with:
     github_token: ${{ secrets.GITHUB_TOKEN }}
 - name: Display Artifacts name
