@@ -1,0 +1,50 @@
+name: CI
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - v*.*.* # skip semantic-release tags
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Integration test
+        id: selftest
+        # Put your action repo here
+        uses: croesusfin/download-release-assets@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check outputs
+        run: |
+          test "${{ steps.selftest.outputs.result }}" == "success"
+          echo "${{ steps.selftest.outputs.artifact_name }} "
+        shell: bash
+
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+     
+      - name: Install Dependencies
+        run: npm ci
+        env:
+          CI: true
+
+      - name: ZIP Assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: zip -r gh-download-release.zip ./ -x "/*node_modules/*"  -x "/*.git/*" 
+
+      - name: Create a release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

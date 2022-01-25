@@ -1,0 +1,32 @@
+name: Download custom Release Asset
+description: Download Asset from Croesufin Github release
+inputs:
+  repository:
+    description: owner/repository
+    required: false
+    default: ""
+  release:
+    description: version of the release
+    required: false
+    default: "latest"
+  github_token:
+    description: Github access token to the repository
+    required: true
+    default: ""
+
+outputs:
+  artifact_name:
+    description: The name of the downloaded artifact 
+  result:
+    description: The state of the action, if the file could be downloaded successfully
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.repository }}
+    - ${{ inputs.release }}
+    - ${{ inputs.github_token }}
+branding:
+  icon: "download-cloud"
+  color: "blue"
