@@ -17,7 +17,7 @@ jobs:
       - name: Integration test
         id: selftest
         # Put your action repo here
-        uses: croesusfin/download-release-assets@main
+        uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

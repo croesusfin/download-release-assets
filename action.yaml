@@ -9,10 +9,6 @@ inputs:
     description: version of the release
     required: false
     default: "latest"
-  download_dir:
-    description: Custom directory name
-    required: false
-    default: ${GITHUB_HEAD_REF}
   github_token:
     description: Github access token to the repository
     required: true
@@ -65,8 +61,6 @@ runs:
 
         GH_ASSET="https://api.github.com/repos/${OWNER_REPOSITORY}/releases/assets/$id"
         # download the artifact
-        mkdir -p  ${{ inputs.download_dir }}
-        cd   ${{ inputs.download_dir }}
         curl -v -L -o "$name" -H "$AUTH" -H 'Accept: application/octet-stream' "$GH_ASSET"
         echo "::set-output name=artifact_name::$name"
         echo "::set-output name=result::$(echo success)"
