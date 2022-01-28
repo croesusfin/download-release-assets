@@ -18,8 +18,8 @@ jobs:
         id: selftest
         # Put your action repo here
         uses: croesusfin/download-release-assets@main
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check outputs
         run: |
