@@ -55,7 +55,7 @@ runs:
         # download the artifact
         curl -v -L -o "$name" -H "$AUTH" -H 'Accept: application/octet-stream' "$GH_ASSET"
         echo "::set-output name=artifact_name::$name"
-        echo "::set-output name=result::success"
+        echo "::set-output name=result::$(echo success)"
       shell: bash
 
 branding:
