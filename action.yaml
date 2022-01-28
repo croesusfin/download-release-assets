@@ -16,14 +16,17 @@ inputs:
 
 outputs:
   artifact_name:
-    description: The name of the downloaded artifact 
+    description: The name of the downloaded artifact
+    value: ${{ steps.getasset.outputs.artifact_name }}
   result:
     description: The state of the action, if the file could be downloaded successfully
+    value: ${{ steps.getasset.outputs.result }}
 
 runs:
   using: "composite"
   steps:
-    - run: |
+    - id: getasset
+      run: |
         set -e
 
         if [[ -z "$GITHUB_TOKEN" ]]; then
