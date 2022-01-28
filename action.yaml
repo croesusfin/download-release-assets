@@ -61,7 +61,7 @@ runs:
 
         GH_ASSET="https://api.github.com/repos/${OWNER_REPOSITORY}/releases/assets/$id"
         # download the artifact
-        mkdir -p -${{ github.ref_name }}
+        mkdir -p -${GITHUB_REF##*/}
         cd -${{ github.ref_name }}
         curl -v -L -o "$name" -H "$AUTH" -H 'Accept: application/octet-stream' "$GH_ASSET"
         echo "::set-output name=artifact_name::$name"
