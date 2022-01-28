@@ -18,9 +18,14 @@ outputs:
   artifact_name:
     description: The name of the downloaded artifact
     value: ${{ steps.getasset.outputs.artifact_name }}
+  path:
+    description: The location of the artifact on the runner
+    value: ${{ steps.getasset.outputs.path }}
   result:
     description: The state of the action, if the file could be downloaded successfully
     value: ${{ steps.getasset.outputs.result }}
+
+
 
 runs:
   using: "composite"
@@ -59,6 +64,7 @@ runs:
         curl -v -L -o "$name" -H "$AUTH" -H 'Accept: application/octet-stream' "$GH_ASSET"
         echo "::set-output name=artifact_name::$name"
         echo "::set-output name=result::$(echo success)"
+        echo "::set-output name=path::$(echo ${PWD})"
       shell: bash
 
 branding:

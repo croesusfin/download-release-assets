@@ -17,6 +17,7 @@ This action downloads an Asset from a Github release.
 |------------------------------------------------------|-----------------------------------------------|
 | `artifact_name`  | The name of the downloaded artifact |
 | `result`  | The state of the action (returns 'success')|
+| `path`  | The location of the artifact on the runner|
 
 
 ## Example usage

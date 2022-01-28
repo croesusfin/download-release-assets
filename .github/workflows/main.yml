@@ -25,6 +25,7 @@ jobs:
         run: |
           test "${{ steps.selftest.outputs.result }}" == "success"
           echo "${{ steps.selftest.outputs.artifact_name }}"
+          echo "${{ steps.selftest.outputs.path }}"
         shell: bash
 
   build:
