@@ -56,7 +56,7 @@ runs:
         curl -v -L -o "$name" -H "$AUTH" -H 'Accept: application/octet-stream' "$GH_ASSET"
         echo "::set-output name=artifact_name::$name"
         echo "::set-output name=result::success"
-     shell: bash
+      shell: bash
 
 branding:
   icon: "download-cloud"
