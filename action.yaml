@@ -45,6 +45,10 @@ runs:
         response=$(curl -sH "$AUTH" https://api.github.com/repos/${OWNER_REPOSITORY}/releases/${INPUT_RELEASE})
         id=`echo "$response" | jq '.assets[0] .id' |  tr -d '"'`
         name=`echo "$response" | jq '.assets[0] .name' |  tr -d '"'`
+        echo $response
+        echo $name
+        echo $id
+        echo ${INPUT_RELEASE}
 
         if [ -z "$id" ]; then
           echo "::set-output name=result::ERROR: version not found $INPUT_RELEASE"
