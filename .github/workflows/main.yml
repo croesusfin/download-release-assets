@@ -23,8 +23,8 @@ jobs:
 
       - name: Check outputs
         run: |
-          test "${{ steps.selftest.outputs.result }}" == "success"
-          echo "${{ steps.selftest.outputs.artifact_name }} "
+          test ${{ steps.selftest.outputs.result }} == "success"
+          echo ${{ steps.selftest.outputs.artifact_name }}
         shell: bash
 
   build:
