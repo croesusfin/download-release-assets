@@ -37,20 +37,14 @@ runs:
         fi
 
         OWNER_REPOSITORY=$GITHUB_REPOSITORY
-        if ! [[ -z ${{ inputs.repository }} ]]; then
-          OWNER_REPOSITORY=${{ inputs.repository }};
+        if ! [[ -z $INPUT_REPOSITORY ]]; then
+          OWNER_REPOSITORY=$INPUT_REPOSITORY;
         fi
 
         AUTH="Authorization: token $GITHUB_TOKEN"
-        response=$(curl -sH "$AUTH" https://api.github.com/repos/${OWNER_REPOSITORY}/releases/${{ inputs.release }}
+        response=$(curl -sH "$AUTH" https://api.github.com/repos/${OWNER_REPOSITORY}/releases/${{ inputs.release }})
         id=`echo "$response" | jq '.assets[0] .id' |  tr -d '"'`
         name=`echo "$response" | jq '.assets[0] .name' |  tr -d '"'`
-
-        echo "Output details.."
-        echo $response
-        echo $name
-        echo $id
-        echo ${{ inputs.release }}
 
         if [ -z "$id" ]; then
           echo "::set-output name=result::ERROR: version not found ${{ inputs.release }}"
