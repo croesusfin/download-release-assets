@@ -4,7 +4,7 @@
   "description": "This action downloads an Asset from a private repo Github release.",
   "devDependencies": {
     "cz-conventional-changelog": "^3.0.1",
-    "semantic-release": "^19.0.2"
+    "semantic-release": "^19.0.3"
   },
   "scripts": {
     "commit": "git-cz",
